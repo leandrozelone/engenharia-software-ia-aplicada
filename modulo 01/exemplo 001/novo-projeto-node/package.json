@@ -1,0 +1,17 @@
+{
+  "name": "novo-projeto-node",
+  "version": "1.0.0",
+  "description": "Projeto Node de exemplo criado pelo assistente",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs": "4.22",
+    "@tensorflow/tfjs-node": "4.22"
+  }
+}
