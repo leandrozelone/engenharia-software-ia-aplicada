@@ -68,5 +68,145 @@
         "category": "acessórios",
         "price": 89.99,
         "color": "marrom"
+    },
+    {
+        "id": 11,
+        "name": "Smartphone Android",
+        "category": "eletrônicos",
+        "price": 799.99,
+        "color": "preto"
+    },
+    {
+        "id": 12,
+        "name": "Notebook Ultrabook",
+        "category": "eletrônicos",
+        "price": 1299.99,
+        "color": "prata"
+    },
+    {
+        "id": 13,
+        "name": "Tablet 10 Polegadas",
+        "category": "eletrônicos",
+        "price": 499.99,
+        "color": "branco"
+    },
+    {
+        "id": 14,
+        "name": "Mouse Gamer RGB",
+        "category": "eletrônicos",
+        "price": 79.99,
+        "color": "vermelho"
+    },
+    {
+        "id": 15,
+        "name": "Teclado Mecânico",
+        "category": "eletrônicos",
+        "price": 149.99,
+        "color": "preto"
+    },
+    {
+        "id": 16,
+        "name": "Blusa de Moletom",
+        "category": "vestuário",
+        "price": 79.99,
+        "color": "cinza"
+    },
+    {
+        "id": 17,
+        "name": "Vestido Floral",
+        "category": "vestuário",
+        "price": 119.99,
+        "color": "rosa"
+    },
+    {
+        "id": 18,
+        "name": "Jaqueta Jeans",
+        "category": "vestuário",
+        "price": 159.99,
+        "color": "azul"
+    },
+    {
+        "id": 19,
+        "name": "Shorts Esportivo",
+        "category": "vestuário",
+        "price": 59.99,
+        "color": "preto"
+    },
+    {
+        "id": 20,
+        "name": "Sapato Social",
+        "category": "calçados",
+        "price": 199.99,
+        "color": "marrom"
+    },
+    {
+        "id": 21,
+        "name": "Bota de Couro",
+        "category": "calçados",
+        "price": 249.99,
+        "color": "preto"
+    },
+    {
+        "id": 22,
+        "name": "Chinelo de Praia",
+        "category": "calçados",
+        "price": 29.99,
+        "color": "azul"
+    },
+    {
+        "id": 23,
+        "name": "Sapatilha Feminina",
+        "category": "calçados",
+        "price": 89.99,
+        "color": "rosa"
+    },
+    {
+        "id": 24,
+        "name": "Cinto de Couro",
+        "category": "acessórios",
+        "price": 49.99,
+        "color": "marrom"
+    },
+    {
+        "id": 25,
+        "name": "Relógio Analógico",
+        "category": "acessórios",
+        "price": 299.99,
+        "color": "prata"
+    },
+    {
+        "id": 26,
+        "name": "Carteira Masculina",
+        "category": "acessórios",
+        "price": 69.99,
+        "color": "preto"
+    },
+    {
+        "id": 27,
+        "name": "Pulseira de Prata",
+        "category": "acessórios",
+        "price": 39.99,
+        "color": "prata"
+    },
+    {
+        "id": 28,
+        "name": "Chapéu Panama",
+        "category": "acessórios",
+        "price": 79.99,
+        "color": "bege"
+    },
+    {
+        "id": 29,
+        "name": "Luvas de Inverno",
+        "category": "acessórios",
+        "price": 34.99,
+        "color": "cinza"
+    },
+    {
+        "id": 30,
+        "name": "Bolsa Feminina",
+        "category": "acessórios",
+        "price": 189.99,
+        "color": "vermelho"
     }
 ]
