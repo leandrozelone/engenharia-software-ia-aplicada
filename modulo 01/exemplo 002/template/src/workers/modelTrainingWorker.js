@@ -18,6 +18,8 @@ const WEIGHTS = {
 const normalize = (value, min, max) => (value - min) / ((max - min) || 1)
 
 function makeContext(products, users) {
+    console.log('Cal makeContext ......', products, users);
+
     const ages = users.map(u => u.age)
     const prices = products.map(p => p.price)
 
@@ -117,6 +119,8 @@ function encodeProduct(product, context) {
 }
 
 function encodeUser(user, context) {
+    console.log('Cal encodeUser ......', user, context);
+
     if (user.purchases.length) {
         return tf.stack(
             user.purchases.map(
@@ -145,6 +149,8 @@ function encodeUser(user, context) {
 }
 
 function createTrainingData(context) {
+    console.log('Cal createTrainingData ......', context);
+
     const inputs = []
     const labels = []
     context.users
@@ -216,6 +222,7 @@ const exampleUser = {
 // 🧠 Configuração e treinamento da rede neural
 // ====================================================================
 async function configureNeuralNetAndTrain(trainData) {
+    console.log('Cal configureNeuralNetAndTrain ......', trainData);
 
     const model = tf.sequential()
     // Camada de entrada
@@ -282,12 +289,17 @@ async function configureNeuralNetAndTrain(trainData) {
 
     return model
 }
+
 async function trainModel({ users }) {
-    console.log('Training model with users:', users);
+    console.log('Cal trainModel ......', users);
+
     postMessage({ type: workerEvents.progressUpdate, progress: { progress: 1 } });
     const products = await (await fetch('/data/products.json')).json()
 
     const context = makeContext(products, users)
+
+    console.log('Contexto criado:', context);
+
     context.productVectors = products.map(product => {
         return {
             name: product.name,
@@ -304,7 +316,10 @@ async function trainModel({ users }) {
     postMessage({ type: workerEvents.progressUpdate, progress: { progress: 100 } });
     postMessage({ type: workerEvents.trainingComplete });
 }
+
 function recommend({ user }) {
+    console.log('Cal recommend ......');
+
     if (!_model) return;
     const context = _globalCtx
     // 1️⃣ Converta o usuário fornecido no vetor de features codificadas
@@ -323,10 +338,14 @@ function recommend({ user }) {
     //    com o vetor codificado do produto.
     //    Por quê? O modelo prevê o "score de compatibilidade" para cada par (usuário, produto).
 
+    console.log('recommend -> userVector', userVector)
 
     const inputs = context.productVectors.map(({ vector }) => {
         return [...userVector, ...vector]
     })
+
+    console.log('recommend -> inputs', inputs)
+    console.log('recommend -> context', context)
 
     // 3️⃣ Converta todos esses pares (usuário, produto) em um único Tensor.
     //    Formato: [numProdutos, inputDim]
@@ -339,6 +358,8 @@ function recommend({ user }) {
 
     // 5️⃣ Extraia as pontuações para um array JS normal.
     const scores = predictions.dataSync()
+    console.log('recommend -> scores', scores)
+
     const recommendations = context.productVectors.map((item, index) => {
         return {
             ...item.meta,
@@ -347,8 +368,12 @@ function recommend({ user }) {
         }
     })
 
+    console.log('recommend -> recommendations', recommendations)
+
     const sortedItems = recommendations
         .sort((a, b) => b.score - a.score)
+
+    console.log('recommend -> sortedItems', sortedItems)
 
     // 8️⃣ Envie a lista ordenada de produtos recomendados
     //    para a thread principal (a UI pode exibi-los agora).
