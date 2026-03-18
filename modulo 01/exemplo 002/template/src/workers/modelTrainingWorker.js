@@ -123,21 +123,23 @@ function encodeUser(user, context) {
                 product => encodeProduct(product, context)
             )
         )
-        .mean(0)
-        .reshape([
-            1,
-            context.dimentions
-        ])
+            .mean(0)
+            .reshape([
+                1,
+                context.dimentions
+            ])
     }
 
-    return td.concat1d(
+    return tf.concat1d(
         [
-            tf.zeros([1]),
+            tf.zeros([1]), // preço é ignorado,
             tf.tensor1d([
-                normalize(user.age, context.minAge, context.maxAge) * WEIGHTS.age
+                normalize(user.age, context.minAge, context.maxAge)
+                * WEIGHTS.age
             ]),
-            tf.zeros([context.numCategories]),
-            tf.zeros([context.numColors])
+            tf.zeros([context.numCategories]), // categoria ignorada,
+            tf.zeros([context.numColors]), // color ignorada,
+
         ]
     ).reshape([1, context.dimentions])
 }
@@ -171,8 +173,6 @@ function createTrainingData(context) {
         // tamanho = userVector + productVector
     }
 }
-
-
 
 // ====================================================================
 // 📌 Exemplo de como um usuário é ANTES da codificação
@@ -215,9 +215,8 @@ const exampleUser = {
 // ====================================================================
 // 🧠 Configuração e treinamento da rede neural
 // ====================================================================
-
 async function configureNeuralNetAndTrain(trainData) {
-    debugger
+
     const model = tf.sequential()
     // Camada de entrada
     // - inputShape: Número de features por exemplo de treino (trainData.inputDim)
@@ -283,7 +282,6 @@ async function configureNeuralNetAndTrain(trainData) {
 
     return model
 }
-
 async function trainModel({ users }) {
     console.log('Training model with users:', users);
     postMessage({ type: workerEvents.progressUpdate, progress: { progress: 1 } });
@@ -298,19 +296,14 @@ async function trainModel({ users }) {
         }
     })
 
-    console.log('context....', context.productVectors)
-
     _globalCtx = context
 
     const trainData = createTrainingData(context)
-
     _model = await configureNeuralNetAndTrain(trainData)
-
 
     postMessage({ type: workerEvents.progressUpdate, progress: { progress: 100 } });
     postMessage({ type: workerEvents.trainingComplete });
 }
-
 function recommend({ user }) {
     if (!_model) return;
     const context = _globalCtx
@@ -366,11 +359,9 @@ function recommend({ user }) {
     });
 
 }
-
-
 const handlers = {
     [workerEvents.trainModel]: trainModel,
-    [workerEvents.recommend]: d => recommend(d.user, _globalCtx),
+    [workerEvents.recommend]: recommend,
 };
 
 self.onmessage = e => {
