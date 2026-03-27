@@ -27,14 +27,17 @@ export const config: ModelConfig = {
     xTitle: 'SmartMOdelRouterGateway',
     port: 3000,
     models: [
-        //top 4 para a listagem ordenada por preço
-        'arcee-ai/trinity-large-preview:free'
+        'arcee-ai/trinity-large-preview:free',
+        'nvidia/nemotron-3-nano-30b-a3b:free',
+        'minimax/minimax-m2.5:free',
     ],
     temperature: 0.2,
-    maxTokens: 50,
+    maxTokens: 100,
     systemPrompt: 'helper assistant for answering questions about the meaning of life',
     provider: {
         sort: {
+            // by: 'throughput',
+            // by: 'latency',
             by: 'price',
             partition: 'none',
         }
