@@ -5,6 +5,24 @@
 - Node.js 24.14.0 (LTS) via [nvm-windows](https://github.com/coreybutler/nvm-windows)
 - Chave de API do [LangSmith](https://smith.langchain.com)
 
+## Criar novo exemplo com LangGraph CLI
+
+Para criar um novo projeto a partir do template oficial:
+
+```bash
+npx @langchain/langgraph-cli new
+```
+
+Siga as instruções interativas para nomear e configurar o projeto.
+
+### Next steps
+
+```bash
+cd myproject
+npm install
+npx @langchain/langgraph-cli@latest dev
+```
+
 ## Instalação
 
 ### 1. Instalar dependências
