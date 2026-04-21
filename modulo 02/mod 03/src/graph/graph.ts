@@ -40,7 +40,7 @@ export type GraphState = z.infer<typeof AppointmentStateAnnotation>;
 
 export function buildAppointmentGraph(
   llmClient: OpenRouterService,
-  appointmentService: AppointmentService
+  appoinmentService: AppointmentService
 ) {
 
 
@@ -49,9 +49,9 @@ export function buildAppointmentGraph(
     stateSchema: AppointmentStateAnnotation,
   })
     .addNode('identifyIntent', createIdentifyIntentNode(llmClient))
-    .addNode('schedule', createSchedulerNode())
-    .addNode('cancel', createCancellerNode())
-    .addNode('message', createMessageGeneratorNode())
+    .addNode('schedule', createSchedulerNode(appoinmentService))
+    .addNode('cancel', createCancellerNode(appoinmentService))
+    .addNode('message', createMessageGeneratorNode(llmClient))
 
     // Flow
     .addEdge(START, 'identifyIntent')

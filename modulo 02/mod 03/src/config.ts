@@ -22,7 +22,8 @@ export const config: ModelConfig = {
   xTitle: 'IA Devs - Prompt Chaining Article Generator',
   models: [
     //https://openrouter.ai/models?max_price=0&fmt=cards&supported_parameters=response_format - lista de provedores que permitem response format
-    'openrouter/elephant-alpha',
+    // 'openrouter/elephant-alpha',
+    'arcee-ai/trinity-large-preview:free', // Alterar llm apos a data 22/04
   ],
   provider: {
     sort: {
